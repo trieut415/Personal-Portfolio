@@ -1,5 +1,5 @@
 # My Personal Portfolio
-This contains all the source code and images for my website @[trieut.com](trieut.com)
+This contains all the source code and images for my website @[trieut.com](https://trieut.com)
 
 ## Getting Started with Create React App
 
