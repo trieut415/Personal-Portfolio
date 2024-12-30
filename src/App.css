@@ -82,7 +82,8 @@ p.danger {
 	color: red;
 }
 
-/************ Navbar Css ************/
+
+/************ Navbar CSS ************/
 nav.navbar {
   padding: 14px 0;
   position: fixed;
@@ -90,27 +91,21 @@ nav.navbar {
   top: 0;
   z-index: 9999;
   transition: 0.32s ease-in-out;
-  background-color: transparent; 
+  background-color: transparent;
+  max-height: 100vh; /* Prevent overflow */
+  overflow-y: auto; /* Add scroll for small screens */
 }
 
 nav.navbar.scrolled {
   padding: 0px 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(22, 27, 37, 0.8) 50%, 
-    rgba(22, 27, 37, 0.6) 75%, 
-    rgba(22, 27, 37, 0.3) 90%,
-    rgba(22, 27, 37, 0.15) 92%,
-    rgba(22, 27, 37, 0.1) 94%,
-
-    rgba(0, 0, 0, 0) 100%
-  );
-  backdrop-filter: blur(2px); 
+  background: linear-gradient(to bottom, rgba(22, 27, 37, 0.8) 50%, rgba(22, 27, 37, 0.6) 75%, rgba(22, 27, 37, 0.3) 90%, rgba(22, 27, 37, 0.15) 92%, rgba(22, 27, 37, 0.1) 94%, rgba(0, 0, 0, 0) 100%);
+  backdrop-filter: blur(2px);
   transition: background-color 0.32s ease-in-out, padding 0.32s ease-in-out;
 }
 
 nav.navbar a.navbar-brand {
   width: 6%;
+  max-width: 100px;
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link {
@@ -118,12 +113,12 @@ nav.navbar .navbar-nav .nav-link.navbar-link {
   color: #fff !important;
   letter-spacing: 0.8px;
   padding: 0 25px;
-  font-size: 18px;
+  font-size: clamp(12px, 2vw, 18px);
   opacity: 0.65;
 }
 
 nav.navbar .navbar-nav a.nav-link.navbar-link:hover {
-  color: #04ACB5 !important;
+  color: #04acb5 !important;
   opacity: 1;
   transition: color 0.3s ease-in-out;
 }
@@ -157,37 +152,18 @@ span.navbar-text {
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.social-icon a::before {
-  content: "";
-  width: 42px;
-  height: 42px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 50%;
-  transform: scale(0);
-  transition: 0.3s ease-in-out;
-}
-
-.social-icon a:hover::before {
-  transform: scale(1);
-}
-
 .social-icon a img {
   width: 40%;
   z-index: 1;
   transition: 0.3s ease-in-out;
 }
 
-.social-icon a:hover img {
-  filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
-}
-
 .navbar-text button {
   font-weight: 700;
   color: #fff;
-  border: 1px solid #04ACB5;
+  border: 1px solid #04acb5;
   padding: 10px 20px;
-  font-size: 15px;
+  font-size: clamp(12px, 1.5vw, 15px);
   margin-left: 10px;
   position: relative;
   background-color: transparent;
@@ -195,85 +171,50 @@ span.navbar-text {
   opacity: 0.75;
 }
 
-.navbar-text button span {
-  z-index: 1;
-}
-
-.navbar-text button::before {
-  content: "";
-  width: 0%;
-  height: 100%;
-  position: absolute;
-  background-color: #fff;
-  left: 0;
-  top: 0;
-  z-index: -1;
-  transition: 0.3s ease-in-out;
-}
-
 .navbar-text button:hover {
   color: #365557;
 }
 
 .navbar-text button:hover::before {
-  content: "";
   width: 100%;
-  height: 100%;
-  position: absolute;
 }
 
-nav.navbar .navbar-toggler:active,
-nav.navbar .navbar-toggler:focus {
-  outline: none;
-  box-shadow: none;
+/* Small screen styles */
+@media (max-height: 500px) {
+  nav.navbar {
+    padding: 8px 0;
+  }
+
+  nav.navbar .navbar-nav .nav-link.navbar-link {
+    font-size: 12px;
+    padding: 0 10px;
+  }
+
+  nav.navbar .navbar-brand img {
+    max-width: 80px;
+  }
+
+  .navbar-text button {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+
+  .social-icon a {
+    width: 30px;
+    height: 30px;
+  }
+
+  .social-icon a img {
+    width: 60%;
+  }
+
+  .custom-modal {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
 }
 
-nav.navbar .navbar-toggler-icon {
-  width: 24px;
-  height: 17px;
-  background-image: none;
-  position: relative;
-  border-bottom: 2px solid #fff;
-  transition: all 300ms linear;
-  top: -2px;
-}
 
-nav.navbar .navbar-toggler-icon:focus {
-  border-bottom: 2px solid #fff;
-}
-
-nav.navbar .navbar-toggler-icon:after,
-nav.navbar .navbar-toggler-icon:before {
-  width: 24px;
-  position: absolute;
-  height: 2px;
-  background-color: #fff;
-  top: 0;
-  left: 0;
-  content: '';
-  z-index: 2;
-  transition: all 300ms linear;
-}
-
-nav.navbar .navbar-toggler-icon:after {
-  top: 8px;
-}
-
-nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
-  transform: rotate(45deg);
-  background-color: #fff;
-  height: 2px;
-}
-
-nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
-  transform: translateY(8px) rotate(-45deg);
-  background-color: #fff;
-  height: 2px;
-}
-
-nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-  border-color: transparent;
-}
 
 /************ Banner Css ************/
 .banner {
@@ -450,6 +391,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   background-color: currentColor;
   animation: blink 1s step-end infinite;
 }
+
 
 /************ About Me Css **********/
 .about {
